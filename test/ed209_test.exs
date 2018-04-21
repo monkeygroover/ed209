@@ -2,9 +2,21 @@ defmodule Ed209Test do
   use ExUnit.Case
   doctest Ed209
 
-  test "greets the world" do
-    result = Ed209.verify_signature("dsf", "dsfdsf", "dsfsdf")
-    IO.inspect result
-    assert(result == {:ok, true})
+  test "verify signature" do
+
+    pub_key = <<172,31,123,107,253,220,121,219,137,101,151,228,191,82,118,217,99,153,121,96,133,115,231,94,160,93,83,94,198,56,128,189>>
+    signature = <<33,242,94,60,34,82,57,240,140,244,180,166,175,7,170,120,244,227,184,45,16,138,7,232,196,111,187,154,227,173,18,103,214,65,108,84,36,145,14,251,244,166,253,206,188,13,30,255,32,230,38,163,196,223,56,49,15,158,175,68,92,55,78,7>>
+    message = <<"hello">>
+
+    assert({:ok, true} == Ed209.verify_signature(pub_key, signature, message))
+  end
+
+  test "tampered message rejected" do
+
+    pub_key = <<172,31,123,107,253,220,121,219,137,101,151,228,191,82,118,217,99,153,121,96,133,115,231,94,160,93,83,94,198,56,128,189>>
+    signature = <<33,242,94,60,34,82,57,240,140,244,180,166,175,7,170,120,244,227,184,45,16,138,7,232,196,111,187,154,227,173,18,103,214,65,108,84,36,145,14,251,244,166,253,206,188,13,30,255,32,230,38,163,196,223,56,49,15,158,175,68,92,55,78,7>>
+    message = <<"hello i was modified">>
+
+    assert({:ok, false} == Ed209.verify_signature(pub_key, signature, message))
   end
 end
