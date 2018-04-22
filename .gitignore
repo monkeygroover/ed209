@@ -24,5 +24,6 @@ ed209-*.tar
 
 # we build native rust libs
 /priv/native/
+/native/ed209/
 
 .vscode/
