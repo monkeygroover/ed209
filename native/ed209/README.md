@@ -2,20 +2,8 @@
 
 ## To build the NIF module:
 
-  * Make sure your projects `mix.exs` has the `:rustler` compiler listed in the `project` function: `compilers: [:rustler] ++ Mix.compilers` If there already is a `:compilers` list, you should append `:rustler` to it.
-  * Add your crate to the `rustler_crates` attribute in the `project function. [See here](https://hexdocs.pm/rustler/basics.html#crate-configuration).
-  * Your NIF will now build along with your project.
+Ensure Rust is installed (https://rustup.rs/)
 
-## To load the NIF:
+    curl https://sh.rustup.rs -sSf | sh
 
-```elixir
-defmodule Ed209 do
-    use Rustler, otp_app: [otp app], crate: "ed209"
-
-    # When your NIF is loaded, it will override this function.
-    def add(_a, _b), do: :erlang.nif_error(:nif_not_loaded)
-end
-```
-
-## Examples
-[This](https://github.com/hansihe/NifIo) is a complete example of a NIF written in Rust.
+`mix compile` from the root of the repo will invoke the rustler complier and chain building of the rust native code

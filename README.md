@@ -1,21 +1,8 @@
 # Ed209
 
-**TODO: Add description**
+An Elixir/Erlang nif wrapper to call Ed25519 functions in rust available from (https://github.com/dalek-cryptography/ed25519-dalek)
 
-## Installation
+# Credits
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `ed209` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:ed209, "~> 0.1.0"}
-  ]
-end
-```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/ed209](https://hexdocs.pm/ed209).
-
+uses [Dalek-ed25519](https://github.com/dalek-cryptography/ed25519-dalek) rust crate for [Ed-25519](https://ed25519.cr.yp.to/) functions
+and [Rustler](https://github.com/hansihe/rustler) for generating the rust/nif interop
