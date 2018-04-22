@@ -27,15 +27,9 @@ fn verify_signature<'a>(env: NifEnv<'a>, args: &[NifTerm<'a>]) -> NifResult<NifT
     let signature_bytes: &[u8] = args[1].into_binary()?.as_slice();
     let message_bytes: &[u8] = args[2].into_binary()?.as_slice();
 
-    let verified: bool = match PublicKey::from_bytes(public_key_bytes) {
-       Ok(public_key) => {
-            match Signature::from_bytes(signature_bytes) {
-                Ok(signature) => public_key.verify::<sha2::Sha512>(message_bytes, &signature),
-                _ => false,
-            }
-       }
-       _ => false,
-    };
+    let verified: bool = PublicKey::from_bytes(public_key_bytes)
+    .and_then(|public_key| Signature::from_bytes(signature_bytes)
+    .map(|signature| public_key.verify::<sha2::Sha512>(message_bytes, &signature))).unwrap();
 
-     Ok((atoms::ok(), verified).encode(env))
+    Ok((atoms::ok(), verified).encode(env))
 }
