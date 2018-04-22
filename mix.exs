@@ -36,6 +36,7 @@ defmodule Ed209.MixProject do
   defp deps do
     [
       {:rustler, "~> 0.16.0"},
+      {:ex_doc, ">= 0.0.0", only: :dev}
     ]
   end
 
@@ -51,6 +52,7 @@ defmodule Ed209.MixProject do
 
   defp package() do
     [
+      files: ["config", "lib", "native/ed209/src", "native/ed209/Cargo.*", "test", "README.md", "LICENSE", "mix.exs", "mix.lock"],
       maintainers: ["Richard Bowker"],
       licenses: ["The Unlicense"],
       links: %{"GitHub" => "https://github.com/monkeygroover/ed209"}
