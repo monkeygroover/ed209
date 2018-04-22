@@ -10,6 +10,11 @@ defmodule Ed209.MixProject do
       rustler_crates: rustler_crates(),
       start_permanent: Mix.env() == :prod,
       deps: deps(),
+      description: description(),
+      package: package(),
+      deps: deps(),
+      name: "ed209",
+      source_url: "https://github.com/monkeygroover/ed209"
     ]
   end
 
@@ -31,6 +36,24 @@ defmodule Ed209.MixProject do
   defp deps do
     [
       {:rustler, "~> 0.16.0"},
+    ]
+  end
+
+  defp description() do
+    """
+    An Elixir/Erlang nif wrapper to call Ed25519 functions in rust from https://github.com/dalek-cryptography/ed25519-dalek
+
+    Requires rust/cargo to build the native nif library; see: https://rustup.rs/
+
+    This is currently only a very basic POC.
+    """
+  end
+
+  defp package() do
+    [
+      maintainers: ["Richard Bowker"],
+      licenses: ["The Unlicense"],
+      links: %{"GitHub" => "https://github.com/monkeygroover/ed209"}
     ]
   end
 end
